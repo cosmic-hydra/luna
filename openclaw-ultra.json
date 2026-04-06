@@ -1,0 +1,107 @@
+{
+  "gateway": {
+    "port": 18789,
+    "bind": "0.0.0.0",
+    "verbose": true,
+    "auth": {
+      "mode": "password",
+      "password": "CHANGE_ME_STRONG_PASSWORD"
+    }
+  },
+  "agent": {
+    "model": "anthropic/claude-opus-4-6",
+    "thinkingLevel": "high",
+    "verboseLevel": "high"
+  },
+  "agents": {
+    "defaults": {
+      "workspace": "~/.openclaw/workspace",
+      "sandbox": {
+        "mode": "off"
+      }
+    }
+  },
+  "browser": {
+    "enabled": true,
+    "headless": true,
+    "launchOptions": {
+      "args": [
+        "--disable-dev-shm-usage",
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-gpu"
+      ]
+    },
+    "comment": "Browser enabled with optimized settings for Termux"
+  },
+  "channels": {
+    "webchat": {
+      "enabled": true,
+      "comment": "Primary interface for Termux deployment"
+    },
+    "telegram": {
+      "enabled": false,
+      "botToken": "",
+      "comment": "Enable by setting TELEGRAM_BOT_TOKEN or adding token here"
+    },
+    "discord": {
+      "enabled": false,
+      "token": "",
+      "comment": "Enable by setting DISCORD_BOT_TOKEN or adding token here"
+    },
+    "whatsapp": {
+      "enabled": false,
+      "comment": "Can be enabled - uses browser automation"
+    },
+    "slack": {
+      "enabled": false,
+      "comment": "Configure Slack tokens to enable"
+    }
+  },
+  "performance": {
+    "comment": "ULTRA-PERFORMANCE MODE - Uses all available resources without limits",
+    "maxConcurrentTasks": 16,
+    "enableMultiCore": true,
+    "noMemoryLimit": true,
+    "workerPool": {
+      "size": "auto",
+      "comment": "Auto-scales based on CPU cores"
+    }
+  },
+  "logging": {
+    "level": "info",
+    "file": "~/.openclaw/logs/gateway.log",
+    "maxSize": "50m",
+    "maxFiles": 10,
+    "compress": true
+  },
+  "system": {
+    "comment": "Android/Termux specific settings for 24/7 operation",
+    "wakeLock": true,
+    "autoRestart": true,
+    "healthCheck": {
+      "enabled": true,
+      "interval": 60000
+    },
+    "resourceMonitoring": {
+      "enabled": true,
+      "logInterval": 300000,
+      "comment": "Log resource usage every 5 minutes"
+    }
+  },
+  "advanced": {
+    "network": {
+      "keepAlive": true,
+      "timeout": 30000,
+      "maxSockets": 100,
+      "maxFreeSockets": 20,
+      "comment": "Optimized for multiple concurrent connections"
+    },
+    "cache": {
+      "enabled": true,
+      "maxSize": "500mb",
+      "ttl": 3600000,
+      "comment": "1 hour cache TTL"
+    }
+  }
+}

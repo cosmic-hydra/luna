@@ -21,19 +21,33 @@ echo "========================================"
 # Change to OpenClaw directory
 cd "$HOME/openclaw" || exit 1
 
-# Set environment variables for optimization
+# Set environment variables for MAXIMUM optimization
 export NODE_ENV=production
-export UV_THREADPOOL_SIZE=8  # Increase thread pool size for better multi-core usage
-export NODE_OPTIONS="--max-old-space-size=1024"  # Limit memory to 1GB for tablet
 
-# Enable all CPU cores
-export OMP_NUM_THREADS=$(nproc)
+# UNLIMITED MODE - Use all available resources
+CORES=$(nproc)
+export UV_THREADPOOL_SIZE=$((CORES * 4))  # 4x thread pool per core for maximum parallelism
+export OMP_NUM_THREADS=$CORES
+
+# NO MEMORY LIMIT - Use all available memory without restrictions
+# Soft limit at 8GB, but Node.js will use what it needs
+export NODE_OPTIONS="--max-old-space-size=8192 --max-semi-space-size=64 --expose-gc"
+
+# Enable advanced performance features
+export UV_USE_IO_URING=1  # Use io_uring if available (Linux 5.1+)
 
 # Log system info
+echo "========================================"
+echo "ULTRA-PERFORMANCE MODE"
+echo "========================================"
 echo "Node version: $(node --version)"
 echo "NPM version: $(npm --version)"
 echo "CPU cores: $(nproc)"
-echo "Memory: $(free -h | grep Mem | awk '{print $2}')"
+echo "Thread pool size: $UV_THREADPOOL_SIZE"
+echo "OMP threads: $OMP_NUM_THREADS"
+echo "Total Memory: $(free -h | grep Mem | awk '{print $2}')"
+echo "Memory Limit: UNLIMITED (8GB soft limit)"
+echo "========================================"
 echo "Starting OpenClaw Gateway..."
 
 # Start OpenClaw with automatic restart on crash
