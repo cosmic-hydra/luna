@@ -1,0 +1,45 @@
+# OpenClaw Termux specific
+.openclaw/
+openclaw/
+
+# Logs
+*.log
+logs/
+
+# Node modules (if any custom additions)
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Credentials
+credentials/
+*.key
+*.pem
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Build outputs
+dist/
+build/
+
+# Package manager
+pnpm-lock.yaml
+package-lock.json
+yarn.lock

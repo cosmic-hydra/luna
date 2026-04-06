@@ -1,0 +1,72 @@
+{
+  "gateway": {
+    "port": 18789,
+    "bind": "0.0.0.0",
+    "verbose": true,
+    "auth": {
+      "mode": "password",
+      "password": "CHANGE_ME_STRONG_PASSWORD"
+    }
+  },
+  "agent": {
+    "model": "anthropic/claude-opus-4-6",
+    "thinkingLevel": "medium",
+    "verboseLevel": "medium"
+  },
+  "agents": {
+    "defaults": {
+      "workspace": "~/.openclaw/workspace",
+      "sandbox": {
+        "mode": "off"
+      }
+    }
+  },
+  "browser": {
+    "enabled": false,
+    "comment": "Browser disabled by default on Android - enable if you have enough resources"
+  },
+  "channels": {
+    "webchat": {
+      "enabled": true,
+      "comment": "WebChat is the primary interface for Termux deployment"
+    },
+    "telegram": {
+      "enabled": false,
+      "botToken": "",
+      "comment": "Set TELEGRAM_BOT_TOKEN env var or add token here to enable"
+    },
+    "discord": {
+      "enabled": false,
+      "token": "",
+      "comment": "Set DISCORD_BOT_TOKEN env var or add token here to enable"
+    },
+    "whatsapp": {
+      "enabled": false,
+      "comment": "WhatsApp can be enabled but may be resource intensive"
+    },
+    "slack": {
+      "enabled": false,
+      "comment": "Configure Slack tokens to enable"
+    }
+  },
+  "performance": {
+    "comment": "Optimized for Samsung S6 Lite (4GB RAM, Snapdragon 720G)",
+    "maxConcurrentTasks": 4,
+    "enableMultiCore": true
+  },
+  "logging": {
+    "level": "info",
+    "file": "~/.openclaw/logs/gateway.log",
+    "maxSize": "10m",
+    "maxFiles": 5
+  },
+  "system": {
+    "comment": "Android/Termux specific settings",
+    "wakeLock": true,
+    "autoRestart": true,
+    "healthCheck": {
+      "enabled": true,
+      "interval": 60000
+    }
+  }
+}
