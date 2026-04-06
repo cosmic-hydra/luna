@@ -37,14 +37,45 @@ This repository provides a complete setup to run [OpenClaw](https://github.com/o
 
 ## Installation
 
-### 1. Install Required Termux Apps
+### Quick Install (Recommended)
+
+**🚀 NEW: Ultra-Performance Bypass Installer**
+
+For maximum performance with **unlimited memory** and **all CPU cores**:
+
+```bash
+# Clone this repository
+git clone https://github.com/cosmic-hydra/luna.git
+cd luna
+
+# Run the bypass installer (automatically does everything!)
+./install-openclaw-bypass.sh
+```
+
+**Features:**
+- ✅ No memory limits (uses all available RAM)
+- ✅ Uses ALL CPU cores with 4x thread multiplier
+- ✅ One-command installation
+- ✅ Auto-configured for maximum performance
+- ✅ Browser automation enabled
+- ✅ 16 concurrent tasks (configurable)
+
+See [BYPASS-INSTALL.md](BYPASS-INSTALL.md) for complete documentation.
+
+---
+
+### Standard Installation (Conservative)
+
+For a more conservative installation with memory limits:
+
+#### 1. Install Required Termux Apps
 
 Install these apps from F-Droid (NOT Google Play Store):
 - [Termux](https://f-droid.org/packages/com.termux/)
 - [Termux:Boot](https://f-droid.org/packages/com.termux.boot/)
 - [Termux:API](https://f-droid.org/packages/com.termux.api/)
 
-### 2. Clone and Run Installer
+#### 2. Clone and Run Standard Installer
 
 Open Termux and run:
 
@@ -60,13 +91,16 @@ chmod +x install-termux.sh
 ./install-termux.sh
 ```
 
-The installer will:
+The standard installer will:
 - Update Termux packages
 - Install Node.js 24 (LTS) and dependencies
 - Clone and build OpenClaw
 - Set up background services
 - Create convenience scripts
 - Configure auto-restart
+- Use conservative memory limits (1GB)
+
+---
 
 ### 3. Configure OpenClaw
 
