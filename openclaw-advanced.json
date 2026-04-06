@@ -1,0 +1,211 @@
+{
+  "$schema": "https://docs.openclaw.ai/schema/config.json",
+  "comment": "Advanced OpenClaw configuration for Samsung S6 Lite - 24/7 operation",
+
+  "gateway": {
+    "port": 18789,
+    "bind": "0.0.0.0",
+    "verbose": true,
+    "auth": {
+      "mode": "password",
+      "password": "CHANGE_ME_TO_STRONG_PASSWORD"
+    },
+    "tailscale": {
+      "mode": "off",
+      "comment": "Set to 'serve' for tailnet access or 'funnel' for public access"
+    }
+  },
+
+  "agent": {
+    "model": "anthropic/claude-opus-4-6",
+    "thinkingLevel": "medium",
+    "verboseLevel": "medium",
+    "comment": "Recommended models: anthropic/claude-opus-4-6, anthropic/claude-sonnet-4-6, openai/gpt-4"
+  },
+
+  "agents": {
+    "defaults": {
+      "workspace": "~/.openclaw/workspace",
+      "sandbox": {
+        "mode": "off",
+        "comment": "Set to 'non-main' to sandbox group/channel sessions in Docker"
+      }
+    }
+  },
+
+  "browser": {
+    "enabled": false,
+    "headless": true,
+    "color": "#FF4500",
+    "comment": "Browser disabled by default - enable only if you have 6GB+ RAM"
+  },
+
+  "channels": {
+    "webchat": {
+      "enabled": true,
+      "comment": "Primary interface for Termux - always enabled"
+    },
+
+    "telegram": {
+      "enabled": false,
+      "botToken": "",
+      "allowFrom": [],
+      "dmPolicy": "pairing",
+      "groups": {},
+      "comment": "Set botToken or TELEGRAM_BOT_TOKEN env var to enable"
+    },
+
+    "discord": {
+      "enabled": false,
+      "token": "",
+      "allowFrom": [],
+      "dmPolicy": "pairing",
+      "guilds": {},
+      "comment": "Set token or DISCORD_BOT_TOKEN env var to enable"
+    },
+
+    "whatsapp": {
+      "enabled": false,
+      "allowFrom": [],
+      "groups": {},
+      "dmPolicy": "pairing",
+      "comment": "Run 'openclaw channels login --channel whatsapp' to pair"
+    },
+
+    "slack": {
+      "enabled": false,
+      "botToken": "",
+      "appToken": "",
+      "comment": "Requires both SLACK_BOT_TOKEN and SLACK_APP_TOKEN"
+    },
+
+    "signal": {
+      "enabled": false,
+      "comment": "Requires signal-cli installation and configuration"
+    },
+
+    "matrix": {
+      "enabled": false,
+      "comment": "Configure matrix homeserver and credentials"
+    }
+  },
+
+  "performance": {
+    "comment": "Optimized for Samsung S6 Lite: Snapdragon 720G (8 cores), 4GB RAM",
+    "maxConcurrentTasks": 4,
+    "enableMultiCore": true,
+    "maxMemoryMB": 1024,
+    "cpuCores": 8
+  },
+
+  "logging": {
+    "level": "info",
+    "file": "~/.openclaw/logs/gateway.log",
+    "maxSize": "10m",
+    "maxFiles": 5,
+    "console": false,
+    "comment": "Set level to 'debug' for troubleshooting, 'warn' for production"
+  },
+
+  "system": {
+    "comment": "Android/Termux specific settings",
+    "wakeLock": true,
+    "autoRestart": true,
+    "healthCheck": {
+      "enabled": true,
+      "interval": 60000,
+      "timeout": 30000
+    },
+    "memoryMonitoring": {
+      "enabled": true,
+      "threshold": 90,
+      "action": "warn"
+    }
+  },
+
+  "cron": {
+    "enabled": false,
+    "jobs": [],
+    "comment": "Schedule periodic tasks - example: daily cleanup"
+  },
+
+  "webhooks": {
+    "enabled": false,
+    "path": "/webhook",
+    "secret": "",
+    "comment": "Enable for external triggers"
+  },
+
+  "presence": {
+    "enabled": true,
+    "comment": "Show typing indicators and presence status"
+  },
+
+  "usage": {
+    "tracking": true,
+    "reporting": "full",
+    "comment": "Track API usage and costs"
+  },
+
+  "models": {
+    "comment": "Model-specific configurations and failover",
+    "failover": {
+      "enabled": true,
+      "retries": 3,
+      "fallbacks": [
+        "anthropic/claude-sonnet-4-6",
+        "openai/gpt-4-turbo"
+      ]
+    }
+  },
+
+  "session": {
+    "pruning": {
+      "enabled": true,
+      "maxAge": 86400000,
+      "maxMessages": 100,
+      "strategy": "summary"
+    },
+    "persistence": {
+      "enabled": true,
+      "path": "~/.openclaw/sessions"
+    }
+  },
+
+  "skills": {
+    "enabled": true,
+    "registry": "clawhub",
+    "autoInstall": false,
+    "workspace": "~/.openclaw/workspace/skills",
+    "comment": "ClawHub integration for additional capabilities"
+  },
+
+  "nodes": {
+    "enabled": false,
+    "comment": "Device nodes for iOS/Android/macOS - not needed for Termux-only setup"
+  },
+
+  "advanced": {
+    "experimental": {
+      "streamingOptimization": true,
+      "aggressiveGC": false,
+      "lowLatencyMode": false
+    },
+    "network": {
+      "timeout": 30000,
+      "retries": 3,
+      "keepAlive": true
+    },
+    "security": {
+      "rateLimiting": {
+        "enabled": false,
+        "maxRequests": 100,
+        "windowMs": 60000
+      },
+      "cors": {
+        "enabled": true,
+        "origins": ["*"]
+      }
+    }
+  }
+}
